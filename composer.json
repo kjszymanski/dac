@@ -19,10 +19,10 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "bmatzner/foundation-bundle": "~5.3",
-        "bmatzner/jquery-bundle": "~2.1"
+        "bmatzner/jquery-bundle": "~2.1",
+        "sensio/generator-bundle": "~2.4"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
         "post-root-package-install": [
