@@ -17,7 +17,7 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
+        "incenteev/composer-parameter-handler": "~2.1",
         "bmatzner/foundation-bundle": "~5.3",
         "bmatzner/jquery-bundle": "~2.1",
         "sensio/generator-bundle": "~2.4"
@@ -52,7 +52,10 @@
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_password": "DB_PASSWORD"
+            }
         },
         "branch-alias": {
             "dev-master": "2.5-dev"
