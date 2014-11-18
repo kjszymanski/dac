@@ -13,6 +13,7 @@
                 {{ note.text }}
                 <div>
                     <a href="{{ path("edit_note", {"note": note.id}) }}" data-reveal-id="modal" class="tiny button" data-reveal-ajax="true">Edytuj notatkę</a>
+                    <a href="{{ path("assign_note", {"note": note.id}) }}" data-reveal-id="modal" class="tiny button" data-reveal-ajax="true">Przypisz notatkę</a>
                     <a href="{{ path("delete_note", {"note": note.id, "model": model.id}) }}" data-reveal-id="modal" class="tiny button" data-reveal-ajax="true">Usuń notatkę</a>
                 </div>
             </div>

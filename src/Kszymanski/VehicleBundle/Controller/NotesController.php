@@ -2,6 +2,7 @@
 
 namespace Kszymanski\VehicleBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
 use Kszymanski\VehicleBundle\Entity\Make;
 use Kszymanski\VehicleBundle\Entity\Model;
 use Kszymanski\VehicleBundle\Entity\Note;
@@ -145,5 +146,50 @@ class NotesController extends Controller
         $this->getDoctrine()->getManager()->flush();
 
         return $this->render('KszymanskiVehicleBundle:Notes:formResult.html.twig', ['msg' => 'Notatka została usunięta.']);
+    }
+
+    /**
+     * @Route("/note/assign/{note}", name="assign_note")
+     * @Template("KszymanskiVehicleBundle:Notes:noteForm.html.twig")
+     *
+     * @param Note $note
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function assignNoteAction(Note $note, Request $request)
+    {
+        $form = $this->createFormBuilder()
+            ->add('models', 'entity', [
+                'class' => 'KszymanskiVehicleBundle:Model',
+                'group_by' => 'make.name',
+                'property' => 'name',
+                'label' => 'Model',
+                'multiple' => true,
+            ])
+            ->add('save', 'submit', ["label" => "Przypisz"])
+            ->setAction($this->generateUrl('assign_note', ['note' => $note->getId()]))
+            ->setAttribute("id", "form")
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $data = $form->getData()["models"];
+
+            foreach ($data as $model) {
+                if (!$note->getModels()->contains($model)) {
+                    $note->addModel($model);
+                }
+            }
+
+            $this->getDoctrine()->getManager()->persist($note);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->render('KszymanskiVehicleBundle:Notes:formResult.html.twig', ['msg' => 'Notatka została przypisana.']);
+        }
+
+        return [
+            'form' => $form->createView(),
+        ];
     }
 }
