@@ -5,8 +5,8 @@ if (isset($_ENV['CLEARDB_DATABASE_URL'])) {
     $container->setParameter('database_host', $db['host']);
     if (isset($db['port']))
         $container->setParameter('database_port', $db['port']);
-    if (isset($db['name']))
-        $container->setParameter('database_name', trim($db['name'], '/'));
+    if (isset($db['path']))
+        $container->setParameter('database_name', trim($db['path'], '/'));
     $container->setParameter('database_user', $db['user']);
     $container->setParameter('database_password', $db['pass']);
 }
