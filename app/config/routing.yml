@@ -1,0 +1,4 @@
+kszymanski_vehicle:
+    resource: "@KszymanskiVehicleBundle/Controller"
+    type:     annotation
+

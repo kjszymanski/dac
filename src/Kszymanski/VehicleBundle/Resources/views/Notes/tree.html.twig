@@ -1,0 +1,14 @@
+<dl class="accordion" data-accordion>
+    {% for make in makes %}
+        <dd class="accordion-navigation">
+            <a href="#panel{{ loop.index }}">{{ make.name }}</a>
+            <div id="panel{{ loop.index }}" class="content">
+                <ul class="side-nav">
+                    {% for model in make.models %}
+                        <li><a href="#{{ make.name }},{{ model.name }}">{{ model.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </dd>
+    {% endfor %}
+</dl>

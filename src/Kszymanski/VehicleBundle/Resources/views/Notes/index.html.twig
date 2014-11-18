@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfoundation/css/foundation.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfoundation/css/normalize.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/bmatznerjquery/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation/foundation.accordion.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation/foundation.reveal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/kszymanskivehicle/js/dynamicpage.js') }}"></script>
+    <script>
+        $(document).foundation();
+    </script>
+{% endblock %}
+
+{% block title %}Notatki{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="row">
+
+                <div class="large-4 small-12 columns">
+                    <div class="panel" id="nav">
+                        {{ render(controller('KszymanskiVehicleBundle:Notes:tree')) }}
+                    </div>
+                </div>
+
+                <div class="large-8 columns" id="content">
+                    <div class="panel callout radius">
+                        <h6>Wybierz markę i model z listy po lewej stronie.</h6>
+                    </div>
+                    <div id="modal" class="reveal-modal" data-reveal></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

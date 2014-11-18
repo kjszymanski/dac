@@ -1,0 +1,17 @@
+{{ form(form) }}
+
+<script>
+    $("#form").submit(function(e) {
+        var url = $(this).attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize(),
+            dataType: "html",
+            success: function(msg){
+                $(".reveal-modal.open").html(msg);
+            }
+        });
+        return false;
+    });
+</script>
