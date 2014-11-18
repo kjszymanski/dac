@@ -13,7 +13,7 @@ $(function() {
                 .fadeOut(200, function() {
                     $mainContent.hide();
                     $.ajax({
-                        url: "/dac/web/app_dev.php/notes/" + newHash
+                        url: "/notes/" + newHash
                     })
                         .done(function( html ) {
                             $("#content").html(html);
