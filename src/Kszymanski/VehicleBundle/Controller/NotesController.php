@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Kszymanski\VehicleBundle\Entity\Make;
 use Kszymanski\VehicleBundle\Entity\Model;
 use Kszymanski\VehicleBundle\Entity\Note;
+use Kszymanski\VehicleBundle\Form\NoteAssignType;
 use Kszymanski\VehicleBundle\Form\NoteType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -158,18 +159,10 @@ class NotesController extends Controller
      */
     public function assignNoteAction(Note $note, Request $request)
     {
-        $form = $this->createFormBuilder()
-            ->add('models', 'entity', [
-                'class' => 'KszymanskiVehicleBundle:Model',
-                'group_by' => 'make.name',
-                'property' => 'name',
-                'label' => 'Model',
-                'multiple' => true,
-            ])
-            ->add('save', 'submit', ["label" => "Przypisz"])
-            ->setAction($this->generateUrl('assign_note', ['note' => $note->getId()]))
-            ->setAttribute("id", "form")
-            ->getForm();
+        $form = $this->createForm(new NoteAssignType(), null, [
+            'action' => $this->generateUrl('assign_note', ['note' => $note->getId()]),
+            'attr' => ['id' => 'form'],
+        ]);
 
         $form->handleRequest($request);
 
